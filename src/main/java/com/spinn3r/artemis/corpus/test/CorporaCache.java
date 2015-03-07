@@ -51,13 +51,15 @@ public class CorporaCache {
 
         File file = new File( ROOT, path );
 
-        System.out.printf( "Writing cache data to: %s\n", file.getAbsolutePath() );
+        byte[] bytes = data.getBytes( Charsets.UTF_8 );
+
+        System.out.printf( "Writing %,d bytes of cache data to: %s\n", bytes.length, file.getAbsolutePath() );
 
         Files.createDirectories( Paths.get( file.getParent() ) );
 
         try( OutputStream out = new FileOutputStream( file ) ) {
 
-            out.write( data.getBytes( Charsets.UTF_8 ) );
+            out.write( bytes );
 
         }
 
