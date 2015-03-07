@@ -33,6 +33,8 @@ public class CorporaCache {
 
     private final Class<?> parent;
 
+    private String extension = "dat";
+
     public CorporaCache(Class<?> parent) {
         this.parent = parent;
     }
@@ -78,11 +80,17 @@ public class CorporaCache {
 
     }
 
-    private String computePath( String key ) {
-        return String.format( "/corpora/%s.%s.dat", parent.getName(), key );
+    public String getExtension() {
+        return extension;
     }
 
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
 
+    private String computePath( String key ) {
+        return String.format( "/corpora/%s.%s.%s", parent.getName(), key, getExtension() );
+    }
 
 }
 

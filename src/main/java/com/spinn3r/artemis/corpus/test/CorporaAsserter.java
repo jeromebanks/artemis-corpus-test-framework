@@ -79,4 +79,11 @@ public class CorporaAsserter {
         this.updateMode = updateMode;
     }
 
+    /**
+     * Get the backing cache.
+     */
+    public CorporaCache getCorporaCache() {
+        return corporaCache;
+    }
+
 }
