@@ -32,7 +32,7 @@ public class CorporaAsserter {
      * This allows us to bulk approve a large number of tests if we've updated
      * an algorithm and think that all of them pass.
      */
-    public static boolean DEFAULT_UPDATE_MODE = false;
+    public static boolean DEFAULT_UPDATE_MODE = "true".equals( System.getProperty( "corpora-asserter.update_mode" ) );
 
     private final CorporaCache corporaCache;
 
