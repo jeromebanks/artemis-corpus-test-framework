@@ -36,15 +36,27 @@ public class CorporaAsserter {
 
     private final CorporaCache corporaCache;
 
-    private boolean updateMode = DEFAULT_UPDATE_MODE;
+    private final boolean updateMode;
+
+    private final Class<?> parent;
+
+    public CorporaAsserter(Class<?> parent) {
+        this( parent, DEFAULT_UPDATE_MODE );
+    }
 
     /**
      * Create a corpora assertion tester using the given class as a parent
      * for logging and resource loading.
      * @param parent
      */
-    public CorporaAsserter(Class<?> parent) {
+    public CorporaAsserter(Class<?> parent, boolean updateMode ) {
+
         this.corporaCache = new CorporaCache( parent );
+        this.parent = parent;
+        this.updateMode = updateMode;
+
+        System.out.printf( "%s (corpora-asserter): Loaded with updateMode=%s\n", parent.getName(), updateMode );
+
     }
 
     /**
@@ -73,10 +85,6 @@ public class CorporaAsserter {
 
     public boolean isUpdateMode() {
         return updateMode;
-    }
-
-    public void setUpdateMode(boolean updateMode) {
-        this.updateMode = updateMode;
     }
 
     /**
