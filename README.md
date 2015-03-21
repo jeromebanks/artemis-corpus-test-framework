@@ -12,5 +12,10 @@ pass, update all the tests by writing new resources.
 
 ## Enabling update mode globally:
 
-You can specify ```-Dcorpora-asserter.update_mode=true``` to your test framework
-which will force update mode globally.
+You can specify:
+
+```
+-Dcorpora-asserter.update_mode=true
+```
+
+to your test framework which will force update mode globally.
