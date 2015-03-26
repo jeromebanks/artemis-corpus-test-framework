@@ -69,6 +69,12 @@ public class CorporaAsserter {
      */
     public void assertCorpora( String key, String actual ) throws IOException {
 
+        System.out.printf( " === START corpora data for %s ===\n", key );
+
+        System.out.printf( "%s\n", actual );
+
+        System.out.printf( " === END corpora data for %s ===\n", key );
+
         if ( isUpdateMode() ) {
 
             corporaCache.write( key, actual );
