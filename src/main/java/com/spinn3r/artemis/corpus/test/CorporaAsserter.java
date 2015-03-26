@@ -17,9 +17,9 @@
  */
 package com.spinn3r.artemis.corpus.test;
 
-import java.io.IOException;
+import org.junit.Assert;
 
-import static org.junit.Assert.*;
+import java.io.IOException;
 
 /**
  * Code that tests for the assertion of a test but instead of testing with
@@ -67,7 +67,7 @@ public class CorporaAsserter {
      * @param actual
      * @throws IOException
      */
-    public void assertCorpora( String key, String actual ) throws IOException {
+    public void assertEquals(String key, String actual) throws IOException {
 
         System.out.printf( " === START corpora data for %s ===\n", key );
 
@@ -83,7 +83,7 @@ public class CorporaAsserter {
 
             String expected = corporaCache.read( key );
 
-            assertEquals( expected, actual );
+            Assert.assertEquals( expected, actual );
 
         }
 

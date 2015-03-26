@@ -31,12 +31,19 @@ public class CorporaCache {
 
     private static String ROOT = "src/test/resources/";
 
+    private String extension = "dat";
+
     private final Class<?> parent;
 
-    private String extension = "dat";
+    private String basedir = "/corpora";
 
     public CorporaCache(Class<?> parent) {
         this.parent = parent;
+    }
+
+    public CorporaCache(Class<?> parent, String basedir) {
+        this.parent = parent;
+        this.basedir = basedir;
     }
 
     public boolean contains( String key ) {
@@ -91,7 +98,7 @@ public class CorporaCache {
     }
 
     private String computePath( String key ) {
-        return String.format( "/corpora/%s.%s.%s", parent.getName(), key, getExtension() );
+        return String.format( "%s/%s.%s.%s", basedir, parent.getName(), key, getExtension() );
     }
 
 }
