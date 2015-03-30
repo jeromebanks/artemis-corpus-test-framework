@@ -27,12 +27,13 @@ import java.io.IOException;
  */
 public class CorporaAsserter {
 
+    private static final String UPDATE_MODE_PROPERTY_NAME = "corpora-asserter.update_mode";
     /**
      * When in update mode, we just write data to resources and all tests pass.
      * This allows us to bulk approve a large number of tests if we've updated
      * an algorithm and think that all of them pass.
      */
-    public static boolean DEFAULT_UPDATE_MODE = "true".equals( System.getProperty( "corpora-asserter.update_mode" ) );
+    public static boolean DEFAULT_UPDATE_MODE = "true".equals( System.getProperty( UPDATE_MODE_PROPERTY_NAME ) );
 
     private final CorporaCache corporaCache;
 
@@ -83,7 +84,8 @@ public class CorporaAsserter {
 
             String expected = corporaCache.read( key );
 
-            Assert.assertEquals( expected, actual );
+            Assert.assertEquals( String.format( "Corpora assertion failed (use -D%s=true to update test corpora)", UPDATE_MODE_PROPERTY_NAME ),
+                                 expected, actual );
 
         }
 
