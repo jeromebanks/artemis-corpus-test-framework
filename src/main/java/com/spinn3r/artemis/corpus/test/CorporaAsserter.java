@@ -84,6 +84,8 @@ public class CorporaAsserter {
 
             String expected = corporaCache.read( key );
 
+
+            // TODO: I could use a longer msg by using a unified diff of the result.
             Assert.assertEquals( String.format( "Corpora assertion failed (use -D%s=true to update test corpora)", UPDATE_MODE_PROPERTY_NAME ),
                                  expected, actual );
 
