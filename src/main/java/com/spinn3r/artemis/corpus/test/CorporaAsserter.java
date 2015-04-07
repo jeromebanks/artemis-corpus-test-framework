@@ -101,7 +101,6 @@ public class CorporaAsserter {
 
         buff.append( String.format( "Corpora assertion failed (use -D%s=true to update test corpora):\n", UPDATE_MODE_PROPERTY_NAME ) );
 
-        /*
         buff.append( "BEGIN UNIFIED DIFF ========\n" );
         buff.append( "===========================\n" );
 
@@ -109,7 +108,6 @@ public class CorporaAsserter {
 
         buff.append( "===========================\n" );
         buff.append( "END UNIFIED DIFF ==========\n" );
-        */
 
         return buff.toString();
 
