@@ -87,8 +87,11 @@ public class CorporaAsserter {
             String expected = corporaCache.read( key );
 
             if ( ! Objects.equals( expected, actual ) ) {
+
                 String msg = computeFailureMsg( expected, actual );
-                throw new ComparisonFailure(msg, expected, actual);
+
+                throw new CorporaComparisonFailure( msg, expected, actual );
+
             }
 
         }
