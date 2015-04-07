@@ -21,7 +21,9 @@ import org.junit.Assert;
 import org.junit.ComparisonFailure;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Code that tests for the assertion of a test but instead of testing with
@@ -42,6 +44,8 @@ public class CorporaAsserter {
     private final boolean updateMode;
 
     private final Class<?> parent;
+
+    private Set<String> usedKeys = new HashSet<>();
 
     public CorporaAsserter(Class<?> parent) {
         this( parent, DEFAULT_UPDATE_MODE );
@@ -71,6 +75,12 @@ public class CorporaAsserter {
      * @throws IOException
      */
     public void assertEquals(String key, String actual) throws IOException {
+
+        if ( usedKeys.contains( key ) ) {
+            throw new RuntimeException( "Key already used in this test.  This will yield incorrect results." );
+        }
+
+        usedKeys.add( key );
 
         System.out.printf( " === START corpora data for %s ===\n", key );
 
