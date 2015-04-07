@@ -86,9 +86,11 @@ public class CorporaAsserter {
 
             String expected = corporaCache.read( key );
 
+            String path = corporaCache.computePath( key );
+
             if ( ! Objects.equals( expected, actual ) ) {
 
-                String msg = computeFailureMsg( expected, actual );
+                String msg = computeFailureMsg( path, expected, actual );
 
                 throw new CorporaComparisonFailure( msg, expected, actual );
 
@@ -98,19 +100,20 @@ public class CorporaAsserter {
 
     }
 
-    private String computeFailureMsg(String expected, String actual) {
+    private String computeFailureMsg(String path, String expected, String actual) {
 
         StringBuilder buff = new StringBuilder();
 
         buff.append( String.format( "Corpora assertion failed (use -D%s=true to update test corpora):\n", UPDATE_MODE_PROPERTY_NAME ) );
 
-        buff.append( "BEGIN UNIFIED DIFF ========\n" );
-        buff.append( "===========================\n" );
+        buff.append( "\n\n" );
+        buff.append( String.format( "path: %s\n", path ) );
+        buff.append( "=== DIFF START\n\n" );
 
         buff.append( DiffGenerator.diff( expected, actual ) );
 
-        buff.append( "===========================\n" );
-        buff.append( "END UNIFIED DIFF ==========\n" );
+        buff.append( "\n\n" );
+        buff.append( "=== DIFF END\n\n" );
 
         return buff.toString();
 

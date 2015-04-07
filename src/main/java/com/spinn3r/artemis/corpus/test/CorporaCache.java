@@ -97,7 +97,7 @@ public class CorporaCache {
         this.extension = extension;
     }
 
-    private String computePath( String key ) {
+    public String computePath( String key ) {
         return String.format( "%s/%s.%s.%s", basedir, parent.getName(), key, getExtension() );
     }
 
