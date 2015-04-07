@@ -20,6 +20,7 @@ package com.spinn3r.artemis.corpus.test;
 import org.junit.Assert;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Code that tests for the assertion of a test but instead of testing with
@@ -84,8 +85,19 @@ public class CorporaAsserter {
 
             String expected = corporaCache.read( key );
 
+            if ( ! Objects.equals( expected, actual ) ) {
 
-            // TODO: I could use a longer msg by using a unified diff of the result.
+                System.out.printf( "BEGIN UNIFIED DIFF ========\n" );
+                System.out.printf( "===========================\n" );
+
+                DiffGenerator.diff( expected, actual );
+
+                System.out.printf( "===========================\n" );
+                System.out.printf( "END UNIFIED DIFF ==========\n" );
+
+
+            }
+
             Assert.assertEquals( String.format( "Corpora assertion failed (use -D%s=true to update test corpora)", UPDATE_MODE_PROPERTY_NAME ),
                                  expected, actual );
 
