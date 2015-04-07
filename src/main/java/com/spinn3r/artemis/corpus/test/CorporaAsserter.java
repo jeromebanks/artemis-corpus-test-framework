@@ -18,6 +18,7 @@
 package com.spinn3r.artemis.corpus.test;
 
 import org.junit.Assert;
+import org.junit.ComparisonFailure;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -86,22 +87,29 @@ public class CorporaAsserter {
             String expected = corporaCache.read( key );
 
             if ( ! Objects.equals( expected, actual ) ) {
-
-                System.out.printf( "BEGIN UNIFIED DIFF ========\n" );
-                System.out.printf( "===========================\n" );
-
-                DiffGenerator.diff( expected, actual );
-
-                System.out.printf( "===========================\n" );
-                System.out.printf( "END UNIFIED DIFF ==========\n" );
-
-
+                String msg = computeFailureMsg( expected, actual );
+                throw new ComparisonFailure(msg, expected, actual);
             }
 
-            Assert.assertEquals( String.format( "Corpora assertion failed (use -D%s=true to update test corpora)", UPDATE_MODE_PROPERTY_NAME ),
-                                 expected, actual );
-
         }
+
+    }
+
+    private String computeFailureMsg(String expected, String actual) {
+
+        StringBuilder buff = new StringBuilder();
+
+        buff.append( String.format( "Corpora assertion failed (use -D%s=true to update test corpora):\n", UPDATE_MODE_PROPERTY_NAME ) );
+
+        buff.append( "BEGIN UNIFIED DIFF ========\n" );
+        buff.append( "===========================\n" );
+
+        buff.append( DiffGenerator.diff( expected, actual ) );
+
+        buff.append( "===========================\n" );
+        buff.append( "END UNIFIED DIFF ==========\n" );
+
+        return buff.toString();
 
     }
 
