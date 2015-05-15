@@ -1,10 +1,13 @@
 package com.spinn3r.artemis.corpus.test;
 
+import com.google.common.base.Preconditions;
 import difflib.DiffUtils;
 import difflib.Patch;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
@@ -14,6 +17,9 @@ public class DiffGenerator {
     private static final int UNIFIED_DIFF_CONTEXT_SIZE = 2;
 
     public static String diff( String original, String revised ) {
+
+        checkNotNull( "original", original );
+        checkNotNull( "revised", revised );
 
         List<String> originalLines = Arrays.asList( original.split( "\n" ) );
         List<String> revisedLines  = Arrays.asList( revised.split( "\n" ) );

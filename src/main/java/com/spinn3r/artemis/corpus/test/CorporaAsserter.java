@@ -96,6 +96,10 @@ public class CorporaAsserter {
 
             String expected = corporaCache.read( key );
 
+            if ( expected == null ) {
+                throw new IOException( "Could not read from cache: " + expected );
+            }
+
             String path = corporaCache.computePath( key );
 
             if ( ! Objects.equals( expected, actual ) ) {
