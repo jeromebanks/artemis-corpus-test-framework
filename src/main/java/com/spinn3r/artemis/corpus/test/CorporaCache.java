@@ -76,6 +76,8 @@ public class CorporaCache {
 
         String path = computePath( key );
 
+        System.out.printf( "CorporaCache reading from: %s\n", path );
+
         try (InputStream is = parent.getResourceAsStream( path )) {
 
             if ( is == null )
