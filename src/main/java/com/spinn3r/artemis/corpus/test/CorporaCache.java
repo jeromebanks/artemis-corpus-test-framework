@@ -78,10 +78,11 @@ public class CorporaCache {
 
         System.out.printf( "CorporaCache reading from: %s\n", path );
 
-        try (InputStream is = parent.getResourceAsStream( path )) {
+        try ( InputStream is = parent.getResourceAsStream( path ) ) {
 
-            if ( is == null )
-                return null;
+            if ( is == null ) {
+                throw new IOException( String.format( "Key %s not in cache at %s", key, path ) );
+            }
 
             byte[] data = ByteStreams.toByteArray( is );
 
