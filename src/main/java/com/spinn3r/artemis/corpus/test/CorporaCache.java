@@ -29,6 +29,9 @@ import java.nio.file.Paths;
  */
 public class CorporaCache {
 
+    private static final boolean USE_CLASSLOADER = false;
+
+    // TODO: change this based on a system property.
     private static String ROOT = "src/test/resources/";
 
     private String extension = "dat";
@@ -78,7 +81,7 @@ public class CorporaCache {
 
         System.out.printf( "CorporaCache reading from: %s\n", path );
 
-        try ( InputStream is = parent.getResourceAsStream( path ) ) {
+        try ( InputStream is = createInputStreamFromPath( path ) ) {
 
             if ( is == null ) {
                 throw new IOException( String.format( "Key %s not in cache at %s", key, path ) );
@@ -88,6 +91,17 @@ public class CorporaCache {
 
             return new String( data, Charsets.UTF_8 );
 
+        }
+
+    }
+
+    private InputStream createInputStreamFromPath( String path ) throws IOException {
+
+        if (USE_CLASSLOADER) {
+            return parent.getResourceAsStream( path );
+        } else {
+            File file = new File( ROOT, path );
+            return new FileInputStream( file );
         }
 
     }
