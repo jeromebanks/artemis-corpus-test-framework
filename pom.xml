@@ -7,7 +7,7 @@
 
     <groupId>com.spinn3r.artemis.corpus.test</groupId>
     <artifactId>artemis-corpus-test-framework</artifactId>
-    <version>5.1.486</version>
+    <version>5.1.487</version>
 
     <description>A test framework for working with test corpora for unit tests.</description>
 
