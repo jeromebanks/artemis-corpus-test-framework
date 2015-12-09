@@ -13,6 +13,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.updatePolicy>never</project.updatePolicy>
 
     </properties>
 
@@ -38,14 +39,92 @@
 
     </dependencies>
 
-    <distributionManagement>
 
-        <repository>
-            <id>ssh-repository</id>
-            <url>sftp://util0063.ger.he.spinn3r.com/d0/maven-repo/public</url>
-        </repository>
+    <profiles>
 
-    </distributionManagement>
+        <profile>
+
+            <id>spinn3r</id>
+
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <distributionManagement>
+                <repository>
+                    <id>ssh-repository</id>
+                    <url>sftp://maven@util0063.ger.he.spinn3r.com/public</url>
+                </repository>
+            </distributionManagement>
+
+            <repositories>
+
+                <repository>
+                    <releases>
+                        <updatePolicy>${project.updatePolicy}</updatePolicy>
+                    </releases>
+                    <id>spinn3r-public</id>
+                    <url>http://public.maven.spinn3r.com/</url>
+                </repository>
+
+            </repositories>
+
+        </profile>
+
+        <profile>
+
+            <id>artifactory</id>
+
+            <distributionManagement>
+
+                <repository>
+                    <id>artifactory-releases</id>
+                    <name>libs-release-local</name>
+                    <url>https://spinn3r.artifactoryonline.com/spinn3r/libs-release-local</url>
+                </repository>
+
+                <snapshotRepository>
+                    <id>artifactory-snapshots</id>
+                    <name>libs-snapshot-local</name>
+                    <url>https://spinn3r.artifactoryonline.com/spinn3r/libs-snapshot-local</url>
+                </snapshotRepository>
+
+            </distributionManagement>
+
+            <repositories>
+
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>artifactory-releases</id>
+                    <name>libs-release</name>
+                    <url>https://spinn3r.artifactoryonline.com/spinn3r/libs-release</url>
+                    <releases>
+                        <updatePolicy>${project.updatePolicy}</updatePolicy>
+                    </releases>
+                </repository>
+
+                <repository>
+                    <snapshots />
+                    <id>artifactory-snapshots</id>
+                    <name>libs-snapshot</name>
+                    <url>https://spinn3r.artifactoryonline.com/spinn3r/libs-snapshot</url>
+                </repository>
+
+                <repository>
+                    <id>spinn3r-public</id>
+                    <url>http://public.maven.spinn3r.com/</url>
+                    <releases>
+                        <updatePolicy>${project.updatePolicy}</updatePolicy>
+                    </releases>
+                </repository>
+
+            </repositories>
+
+        </profile>
+
+    </profiles>
 
     <build>
         <extensions>
