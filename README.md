@@ -1,21 +1,5 @@
-# artemis-corpus-test-framework
+# Obsolete
 
-A test framework for working with test corpora for unit tests.
+Moved to artemis-framework 
 
-Say you have a complex string or HTML report that you want to test.
-
-If you make a change to your code, this could impact the output of hundreds of
-unit tests.
-
-It would be nice to just verify the new output of all the tests, then, in one
-pass, update all the tests by writing new resources.
-
-## Enabling update mode globally:
-
-You can specify:
-
-```
--Dcorpora-asserter.update_mode=true
-```
-
-to your test framework which will force update mode globally.
+Provided for historical reasons only and will be removed by Feb 1, 2016
