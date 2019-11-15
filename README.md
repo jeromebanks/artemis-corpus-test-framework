@@ -1,5 +1,5 @@
-# Obsolete
 
-Moved to artemis-framework 
+# Demandbase fork of artemis-framework
+#  Needed to build our fork of boilerpipe
 
-Provided for historical reasons only and will be removed by Feb 1, 2016
+
